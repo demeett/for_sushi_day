@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'home/view/home_page_view.dart';
+import 'package:for_sushi_day/routes/navigator_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +14,22 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(color: Colors.transparent),
         primarySwatch: Colors.blue,
+        // inputDecorationTheme: const InputDecorationTheme(
+        //   labelStyle: TextStyle(
+        //     color: Colors.white,
+        //   ),
+        //   focusedBorder: UnderlineInputBorder(
+        //     borderSide: BorderSide(
+        //       style: BorderStyle.solid,
+        //       color: Colors.white,
+        //     ),
+        //   ),
+        // ),
       ),
-      home: const HomePageView(),
+      //home: const ProductsView(),
+      routes: NavigatorRoutes().items,
     );
   }
 }

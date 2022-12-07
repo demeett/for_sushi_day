@@ -1,13 +1,275 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ProductsView extends StatelessWidget {
+class ProductsView extends StatefulWidget {
   const ProductsView({super.key});
 
   @override
+  State<ProductsView> createState() => _ProductsViewState();
+}
+
+class _ProductsViewState extends State<ProductsView> {
+  List<String> selection = ["Popular", "Latest", "Categories", "Up Down"];
+  Color colorName = Colors.grey;
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: NavigationBottomBarWidget(),
+    final screenWidht = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      backgroundColor: Colors.white30,
+      body: Container(
+        width: double.infinity,
+        height: screenHeight,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("assets/images/grey_background.jpeg"),
+          fit: BoxFit.fill,
+        )),
+        child: Column(children: [
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                //mainAxisSize: MainAxisSize.min,
+                children: [
+                  const HeaderWidget(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //Row ve Columnların içinde widgetların size'ını vermek gerekebilir bazen.
+                  //eğer gözükmüyorsa expandedla sarıp deneyebiliriz.
+                  const SearchView(),
+
+                  SizedBox(
+                    height: 40,
+                    child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: selection.length,
+                        itemBuilder: ((context, index) {
+                          return TextButton(
+                              style: TextButton.styleFrom(),
+                              onPressed: () {
+                                setState(() {
+                                  colorName = Colors.pink;
+                                });
+                              },
+                              child: Text(
+                                selection[index],
+                                style: TextStyle(color: colorName),
+                              ));
+                        })),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: SizedBox(
+                            width: 150,
+                            child: Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                elevation: 1,
+                                margin: EdgeInsets.zero,
+                                color: Colors.white70,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                          height: 125,
+                                          //width: 150,
+                                          child: Image.asset(
+                                            "assets/images/sushii.png",
+                                            fit: BoxFit.fill,
+                                          )),
+                                      // const ListTile(
+                                      //   contentPadding: EdgeInsets.zero,
+                                      //   title: Text("title"),
+                                      //   subtitle: Text("subtitle"),
+                                      // ),
+                                      const Text(
+                                        "Nigiri",
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            textAlign: TextAlign.start,
+                                            "${15}",
+                                            style: TextStyle(color: Colors.pink),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                            width: 20,
+                                            child: IconButton(
+                                                style: IconButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        side:
+                                                            BorderSide.lerp(const BorderSide(), const BorderSide(), 2),
+                                                        borderRadius: BorderRadius.circular(
+                                                          10,
+                                                        ))),
+                                                padding: EdgeInsets.zero,
+                                                onPressed: () {},
+                                                icon: const Icon(
+                                                  Icons.shopping_basket,
+                                                  color: Colors.grey,
+                                                )),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        );
+                      },
+                      itemCount: 3,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
+class SearchView extends StatelessWidget {
+  const SearchView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 5,
+          child: SizedBox(
+            height: 40,
+            child: TextField(
+              cursorColor: Colors.white70,
+              onChanged: (value) {},
+              textAlignVertical: TextAlignVertical.bottom,
+              decoration: InputDecoration(
+                  hintText: "Search",
+                  alignLabelWithHint: true,
+                  suffixIconColor: Colors.white,
+                  suffixIcon: const Icon(
+                    Icons.search,
+                  ),
+                  fillColor: const Color.fromARGB(255, 210, 209, 209),
+                  //iconColor: Colors.grey,
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Color.fromARGB(255, 221, 221, 223)),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(color: Color.fromARGB(255, 221, 221, 223), width: 1.0),
+                  )),
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 15,
+        ),
+        Expanded(
+            child: SizedBox(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              backgroundColor: Colors.pink,
+            ),
+            onPressed: () {},
+            child: const Icon(
+              FontAwesomeIcons.repeat,
+              size: 15,
+            ),
+          ),
+        ))
+      ],
+    );
+  }
+}
+
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          flex: 4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                textAlign: TextAlign.center,
+                "Welcome Back!",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+              Text(
+                "Hi, Zanaur Renaldie",
+                style: TextStyle(color: Colors.black87, fontWeight: FontWeight.normal, fontSize: 15),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: const CircleBorder(),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                minimumSize: const Size(34, 34),
+              ),
+              child: const Icon(
+                FontAwesomeIcons.bell,
+                size: 18,
+                color: Colors.black87,
+              ),
+            ),
+            OutlinedButton(
+              //minimum size maximum size içerideki boşlukları yok etmeyi sağladı
+              //shrink wrap de aynı şekilde sağ sol paddingleri ortadan kaldırdı.
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: const CircleBorder(),
+                minimumSize: const Size(34, 34),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: Image.asset(
+                "assets/images/New-Year-Chinese-Lantern.png",
+                fit: BoxFit.fill,
+                width: 24,
+                height: 24,
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
@@ -20,11 +282,13 @@ class NavigationBottomBarWidget extends StatefulWidget {
 }
 
 class _NavigationBottomBarWidgetState extends State<NavigationBottomBarWidget> {
+  List<String> clas = ["/bottom"];
   int selectedIndex = 0;
   void setIndex(int index) {
     setState(() {
       selectedIndex = index;
     });
+    Navigator.of(context).pushNamed(clas[selectedIndex]);
   }
 
 //BottomNavigationbarda currentIndex tıkladığımız yerin indexini alıyor.
@@ -35,44 +299,41 @@ class _NavigationBottomBarWidgetState extends State<NavigationBottomBarWidget> {
 //ontape methodumuzu yazacağız ardından currentIndex değiştiricez ve
 //yapmak istediğmiz işlemleri yaptıracağız. Belki başka sayfaya yönlendirme yapılcak.
   //ontap: Itemlara bastığımızda yapılması istenen şey anlamına geliyor.
+  final screen = [const ProductsView()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screen[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
           onTap: setIndex,
           showSelectedLabels: true,
           currentIndex: selectedIndex,
           selectedItemColor: Colors.pink,
-          //fixedColor: Colors.pink,
           unselectedItemColor: Colors.grey,
           items: const [
             BottomNavigationBarItem(
               label: "Home",
               icon: Icon(
                 FontAwesomeIcons.house,
-                //color: Colors.grey,
               ),
             ),
             BottomNavigationBarItem(
               label: "Save",
               icon: Icon(
                 FontAwesomeIcons.bookmark,
-                //color: Colors.grey,
               ),
             ),
             BottomNavigationBarItem(
               label: "Shop",
               icon: Icon(
                 FontAwesomeIcons.bagShopping,
-                //color: Colors.grey,
               ),
             ),
             BottomNavigationBarItem(
               label: "Profile",
               icon: Icon(
                 FontAwesomeIcons.user,
-                //color: Colors.grey,
               ),
             )
           ]),

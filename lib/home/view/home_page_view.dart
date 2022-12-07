@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:for_sushi_day/products/products_view.dart';
 
 class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
@@ -111,10 +110,11 @@ class HomePageView extends StatelessWidget {
                       width: screenWidht * 0.5,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ProductsView()),
-                          );
+                          Navigator.of(context).pushNamed("/bottom");
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => const ProductsView()),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
