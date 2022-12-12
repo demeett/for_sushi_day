@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:for_sushi_day/payment/view/payment_view.dart';
+import 'package:for_sushi_day/products/product_detail_view.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({super.key});
@@ -140,7 +142,9 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed("/productDetail");
+      },
       child: Card(
         elevation: 10,
         color: Colors.grey[200],
@@ -227,7 +231,9 @@ class ItemsListView extends StatelessWidget {
                   margin: EdgeInsets.zero,
                   color: Colors.grey[100],
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed("/productDetail");
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -416,7 +422,7 @@ class NavigationBottomBarWidget extends StatefulWidget {
 }
 
 class _NavigationBottomBarWidgetState extends State<NavigationBottomBarWidget> {
-  List<String> clas = ["/bottom"];
+  List<String> clas = ["/bottom", "/productDetail", "/paymentPage"];
   int selectedIndex = 0;
   void setIndex(int index) {
     setState(() {
@@ -433,7 +439,7 @@ class _NavigationBottomBarWidgetState extends State<NavigationBottomBarWidget> {
 //ontape methodumuzu yazacağız ardından currentIndex değiştiricez ve
 //yapmak istediğmiz işlemleri yaptıracağız. Belki başka sayfaya yönlendirme yapılcak.
   //ontap: Itemlara bastığımızda yapılması istenen şey anlamına geliyor.
-  final screen = [const ProductsView()];
+  final screen = [const ProductsView(), const ProductDetailView(), const PaymentView()];
 
   @override
   Widget build(BuildContext context) {

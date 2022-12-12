@@ -9,102 +9,111 @@ class ProductDetailView extends StatelessWidget {
     final screenWidht = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: screenHeight,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("assets/images/grey_background.jpeg"),
-          fit: BoxFit.fill,
-        )),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
-                    CustomIconButton(
-                      icon: Icons.arrow_back_outlined,
-                    ),
-                    Text(
-                      "Product Detail",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.end,
-                    ),
-                    CustomIconButton(
-                      icon: Icons.list_alt_outlined,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40, bottom: 40),
-                  child: SizedBox(height: 250, child: Image.asset("assets/images/nigiri.png")),
-                ),
-                Text(
-                  "NIGIRI SUSHI PLATTER",
-                  style: GoogleFonts.kenia(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Japanese Food",
-                  style: GoogleFonts.ibmPlexSans(letterSpacing: 1),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          height: screenHeight,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage("assets/images/grey_background.jpeg"),
+            fit: BoxFit.fill,
+          )),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: const [
-                      Expanded(child: CustomElevatedButton()),
-                      SizedBox(
-                        width: 5,
+                      CustomIconButton(
+                        icon: Icons.arrow_back_outlined,
                       ),
-                      Expanded(child: CustomElevatedButton()),
-                      SizedBox(
-                        width: 5,
+                      Text(
+                        "Product Detail",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.end,
                       ),
-                      Expanded(child: CustomElevatedButton()),
+                      CustomIconButton(
+                        icon: Icons.list_alt_outlined,
+                      ),
                     ],
                   ),
-                ),
-                const Text("data"),
-                const Text("data"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Expanded(
-                      child: Text("defe"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40, bottom: 40),
+                    child: SizedBox(height: 250, child: Image.asset("assets/images/nigiri.png")),
+                  ),
+                  Text(
+                    "NIGIRI SUSHI PLATTER",
+                    style: GoogleFonts.kenia(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Japanese Food",
+                    style: GoogleFonts.ibmPlexSans(letterSpacing: 1),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                    child: Row(
+                      children: const [
+                        Expanded(
+                            child: CustomElevatedButton(
+                          title: "8PCS",
+                        )),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(child: CustomElevatedButton(title: "12PCS")),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(child: CustomElevatedButton(title: "16PCS")),
+                      ],
                     ),
-                    Expanded(child: ElevatedButton(onPressed: () {}, child: const Text("")))
-                  ],
-                )
-              ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                    child: Text(
+                      "The word nigiri comes from the Japanese nigirizushi, which translates as hand-pressed sushi ",
+                      style: TextStyle(
+                        letterSpacing: 1,
+                      ),
+                      textScaleFactor: 1,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: screenHeight * 0.08, right: 20, left: 20),
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "\$15",
+                              style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.pink),
+                                ),
+                                child: const Text("Add to Card"),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-
-          // child: Column(
-          //   children: [
-          //     ListTile(
-          //       trailing: const CustomIconButton(
-          //         icon: Icons.list_alt_outlined,
-          //       ),
-          //       leading: const CustomIconButton(
-          //         icon: Icons.arrow_back_outlined,
-          //       ),
-          //       title: Container(
-          //         color: Colors.red,
-          //         child: const Padding(
-          //           padding: EdgeInsets.only(bottom: 8.0),
-          //           child: Text(
-          //             "Product Detail",
-          //             textAlign: TextAlign.center,
-          //           ),
-          //         ),
-          //       ),
-          //       subtitle: Container(height: 400, color: Colors.white, child: Image.asset("assets/images/nigiri.png")),
-          //     )
-          //   ],
-          // ),
         ),
       ),
     );
@@ -114,16 +123,19 @@ class ProductDetailView extends StatelessWidget {
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     super.key,
+    required this.title,
   });
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {},
         style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.grey),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0), side: BorderSide.none))),
-        child: const Text(""));
+        child: Text(title));
   }
 }
 

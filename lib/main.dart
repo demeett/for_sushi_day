@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:for_sushi_day/products/product_detail_view.dart';
+import 'package:for_sushi_day/routes/navigator_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
-      home: const ProductDetailView(),
-      //routes: NavigatorRoutes().items,
+      //home: const HomePageView(),
+      routes: NavigatorRoutes().items,
     );
   }
 }
